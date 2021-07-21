@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   // find all categories
 
   Category.findAll({
-    include: [Product],
+    include: [{model: Product}],
   })
   .then((catagories) => res.json(catagories))
   .catch((err) => res.status(500).json(err));
@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id,
     },
-    include: [Product],
+    include: [{model: Product}],
   })
   .then((category) => res.json(category))
   .catch((err) => res.status(400).json(err));

@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   // find all tags
 
   Tag.findAll({
-    include: [Product],
+    include: [{model: Product, through: ProductTag, as: 'tagid'}],
   })
   .then((tags) => res.json(tags))
   .catch((err) => res.status(500).json(err));
@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id,
     },
-    include: [Product],
+    include: [{model: Product, through: ProductTag, as: 'tagid'}],
   })
   .then((tag) => res.json(tag))
   .catch((err) => res.status(400).json(err));
